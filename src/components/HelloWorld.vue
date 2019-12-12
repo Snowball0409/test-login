@@ -1,27 +1,39 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <input type="text" id="useridBox">
-    <br>
-    <button id="submitButton" value="submit" v-on:click="submit">submit</button>
+  <div>
+    <h1>Login Page</h1>
+    <form @submit.prevent="login">
+      <label>User Name</label>
+      <input type="text" v-model="userName" required>
+      <br>
+      <label>Password</label>
+      <input type="password" v-model="password" required>
+      <br>
+      <button type="submit">Log In</button>
+    </form>
   </div>
 </template>
 
 <script>
 
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  },
-  methods: {
-    submit:function(){
-      return{
-        message:0
+  export default {
+    data () {
+      return {
+        userName: '',
+        password: '',
+        token:''          
       }
     },
-  },
-}
+    methods: {
+      login(){
+        if( this.userName == 'abcd' && this.password == '1234' ){
+          this.$set(this.token, 'token', 'ImLogin')
+          this.$router.push('/');
+        }
+        else
+          alert('login failed')
+      }
+    } 
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
